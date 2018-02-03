@@ -16,5 +16,5 @@ computer.
 To upgrade to the latest version of Sass, run:
 
 ```sh
-brew upgrade --fetch-HEAD sass
+brew upgrade sass
 ```
