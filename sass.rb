@@ -5,8 +5,8 @@ class Sass < Formula
   homepage "https://sass-lang.com"
 
   devel do
-    url "https://github.com/sass/dart-sass/archive/1.0.0-beta.5.3.tar.gz"
-    sha256 "5b2959b58ca7b703f48cf6bd25283a690c12b6a7226873f94a09a0e6a5f3a112"
+    url "https://github.com/sass/dart-sass/archive/1.0.0-rc.1.tar.gz"
+    sha256 "cb0c6a8b67385a0bb04b49bd9bc3be9273ef1c314e915c2ac5f73d97f9d78060"
 
     depends_on "dart-lang/dart/dart" => :build
   end
