@@ -31,7 +31,7 @@ class Sass < Formula
 
     (bin/"sass").write <<SH
 #!/bin/sh
-exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass.dart.app.snapshot"
+exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass.dart.app.snapshot" "$@"
 SH
     chmod 0555, "#{bin}/sass"
   end
