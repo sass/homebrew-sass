@@ -4,12 +4,10 @@ class Sass < Formula
   desc "Stylesheet Preprocessor"
   homepage "https://sass-lang.com"
 
-  devel do
-    url "https://github.com/sass/dart-sass/archive/1.4.0.tar.gz"
-    sha256 "5d3da3f0da5ca931a69cf9e534329ac8ab451736425b8f5795ffbaf5c05a4c57"
+  url "https://github.com/sass/dart-sass/archive/1.4.0.tar.gz"
+  sha256 "5d3da3f0da5ca931a69cf9e534329ac8ab451736425b8f5795ffbaf5c05a4c57"
 
-    depends_on "dart-lang/dart/dart" => [:build, "devel"]
-  end
+  depends_on "dart-lang/dart/dart" => [:build, "devel"]
 
   def install
     dart = Formula["dart-lang/dart/dart"].devel.opt_bin

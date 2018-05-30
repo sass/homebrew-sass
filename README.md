@@ -7,7 +7,7 @@ easily install and update Sass.
 To use this tap, first [install Homebrew][Homebrew]. Then, run:
 
 ```sh
-brew install --devel sass/sass/sass
+brew install sass/sass/sass
 ```
 
 You're good to go! You can now run the `sass` executable from anywhere on your
