@@ -10,7 +10,7 @@ class Sass < Formula
   depends_on "dart-lang/dart/dart" => [:build, "devel"]
 
   def install
-    dart = Formula["dart-lang/dart/dart"].devel.opt_bin
+    dart = Formula["dart-lang/dart/dart"].opt_bin
 
     system dart/"pub", "get"
     system dart/"dart",
