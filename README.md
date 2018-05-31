@@ -1,4 +1,4 @@
-This is the official [Sass][] tap for [Homebrew][]. OS X users can use it to
+This is the official [Sass][] tap for [Homebrew][]. macOS users can use it to
 easily install and update Sass.
 
 [Sass]: https://sass-lang.com
