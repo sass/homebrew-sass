@@ -1,4 +1,4 @@
-grequire "yaml"
+require "yaml"
 
 class Sass < Formula
   desc "Stylesheet Preprocessor"
