@@ -12,6 +12,8 @@ class Sass < Formula
   def install
     dart = Formula["dart-lang/dart/dart@2"].opt_bin
 
+    # Tell the pub server where these installations are coming from.
+    ENV["PUB_ENVIRONMENT"] = "homebrew:sass"
     system dart/"pub", "get"
     system dart/"dart",
            "--snapshot=sass.dart.app.snapshot",
