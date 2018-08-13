@@ -7,10 +7,10 @@ class Sass < Formula
   url "https://github.com/sass/dart-sass/archive/1.11.0.tar.gz"
   sha256 "e46df4433e5bb45972a1566d03ada31693b0aec88bc7995f8abcd012416c527b"
 
-  depends_on "dart-lang/dart/dart@2" => :build
+  depends_on "dart-lang/dart/dart" => :build
 
   def install
-    dart = Formula["dart-lang/dart/dart@2"].opt_bin
+    dart = Formula["dart-lang/dart/dart"].opt_bin
 
     # Tell the pub server where these installations are coming from.
     ENV["PUB_ENVIRONMENT"] = "homebrew:sass"
