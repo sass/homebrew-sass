@@ -15,23 +15,20 @@ class Sass < Formula
     # Tell the pub server where these installations are coming from.
     ENV["PUB_ENVIRONMENT"] = "homebrew:sass"
     system dart/"pub", "get"
-    system dart/"dart",
-           "--snapshot=sass.dart.app.snapshot",
-           "--snapshot-kind=app-jit",
-           "bin/sass.dart", "tool/app-snapshot-input.scss"
-    lib.install "sass.dart.app.snapshot"
+    system dart/"dart2aot", "bin/sass.dart", "sass.dart.native"
+    lib.install "sass.dart.native"
 
     # Copy the version of the Dart VM we used into our lib directory so that if
     # the user upgrades their Dart VM version it doesn't break Sass's snapshot,
     # which was compiled with an older version.
-    cp dart/"dart", lib
+    cp dart/"dartaotruntime", lib
 
     pubspec = YAML.safe_load(File.read("pubspec.yaml"))
     version = pubspec["version"]
 
     (bin/"sass").write <<SH
 #!/bin/sh
-exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass.dart.app.snapshot" "$@"
+exec "#{lib}/dartaotruntime" "-Dversion=#{version}" "#{lib}/sass.dart.native" "$@"
 SH
     chmod 0555, "#{bin}/sass"
   end
