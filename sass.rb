@@ -29,7 +29,7 @@ class Sass < Formula
       # Copy the version of the Dart VM we used into our lib directory so that if
       # the user upgrades their Dart VM version it doesn't break Sass's snapshot,
       # which was compiled with an older version.
-      cp dart/"dart2aot", lib
+      cp dart/"dartaotruntime", lib
 
       (bin/"sass").write <<SH
 #!/bin/sh
