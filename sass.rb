@@ -33,7 +33,7 @@ class Sass < Formula
 
       (bin/"sass").write <<SH
 #!/bin/sh
-exec "#{lib}/dart2aot" "#{lib}/sass.dart.native" "$@"
+exec "#{lib}/dartaotruntime" "#{lib}/sass.dart.native" "$@"
 SH
     else
       system dart/"dart",
