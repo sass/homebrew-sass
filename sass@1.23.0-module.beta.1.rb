@@ -1,4 +1,3 @@
-require "yaml"
 require "sass"
 
 class SassATModuleBeta1 < Sass
