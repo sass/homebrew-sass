@@ -1,4 +1,4 @@
-require "sass"
+require_relative "sass"
 
 class SassATModuleBeta1 < Sass
   desc "Stylesheet Preprocessor"
