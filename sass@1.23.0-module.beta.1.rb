@@ -1,6 +1,6 @@
 require_relative "sass"
 
-class SassATModuleBeta1 < Sass
+class SassAT1230ModuleBeta1 < Sass
   desc "Stylesheet Preprocessor"
   homepage "https://sass-lang.com"
 
