@@ -15,5 +15,7 @@ before_install:
 
 script:
 - brew audit *.rb
-- brew install *.rb
-- brew test *.rb
+- for file in $(ls *.rb); do
+    brew install --force "$file";
+    brew test "$file";
+  done
