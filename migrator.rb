@@ -22,7 +22,7 @@ class Migrator < Formula
     if Hardware::CPU.is_64_bit?
       # Build a native-code executable on 64-bit systems only. 32-bit Dart
       # doesn't support this.
-      system dart/"dart2aot", "-Dversion=#{version}", "bin/sass_migator.dart",
+      system dart/"dart2aot", "-Dversion=#{version}", "bin/sass_migrator.dart",
              "sass_migrator.dart.native"
       lib.install "sass_migrator.dart.native"
 
