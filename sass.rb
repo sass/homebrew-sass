@@ -22,19 +22,9 @@ class Sass < Formula
     if Hardware::CPU.is_64_bit?
       # Build a native-code executable on 64-bit systems only. 32-bit Dart
       # doesn't support this.
-      system dart/"dart2aot", "-Dversion=#{version}", "bin/sass.dart",
-             "sass.dart.native"
-      lib.install "sass.dart.native"
-
-      # Copy the version of the Dart VM we used into our lib directory so that if
-      # the user upgrades their Dart VM version it doesn't break Sass's snapshot,
-      # which was compiled with an older version.
-      cp dart/"dartaotruntime", lib
-
-      (bin/"sass").write <<SH
-#!/bin/sh
-exec "#{lib}/dartaotruntime" "#{lib}/sass.dart.native" "$@"
-SH
+      system dart/"dart2native", "-Dversion=#{version}", "bin/sass.dart",
+             "-o", "sass"
+      bin.install "sass"
     else
       system dart/"dart",
              "--snapshot=sass.dart.app.snapshot",
