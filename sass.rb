@@ -27,6 +27,7 @@ class Sass < Formula
       bin.install "sass"
     else
       system dart/"dart",
+             "-Dversion=#{version}",
              "--snapshot=sass.dart.app.snapshot",
              "--snapshot-kind=app-jit",
              "bin/sass.dart", "tool/app-snapshot-input.scss"
@@ -39,7 +40,7 @@ class Sass < Formula
 
       (bin/"sass").write <<SH
 #!/bin/sh
-exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass.dart.app.snapshot" "$@"
+exec "#{lib}/dart" "#{lib}/sass.dart.app.snapshot" "$@"
 SH
     end
     chmod 0555, "#{bin}/sass"
