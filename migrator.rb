@@ -37,10 +37,10 @@ class Migrator < Formula
       # which was compiled with an older version.
       cp dart/"dart", lib
 
-      (bin/"sass-migrator").write <<SH
-#!/bin/sh
-exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass_migrator.dart.app.snapshot" "$@"
-SH
+      (bin/"sass-migrator").write <<~SH
+        #!/bin/sh
+        exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass_migrator.dart.app.snapshot" "$@"
+      SH
     end
     chmod 0555, "#{bin}/sass-migrator"
   end
