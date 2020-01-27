@@ -47,7 +47,7 @@ class Sass < Formula
   end
 
   test do
-    (testpath/"test.scss").write(".class {property: 1 + 1}");
+    (testpath/"test.scss").write(".class {property: 1 + 1}")
     assert_match "property: 2;", shell_output("#{bin}/sass test.scss 2>&1")
   end
 end
