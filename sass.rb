@@ -38,16 +38,16 @@ class Sass < Formula
       # which was compiled with an older version.
       cp dart/"dart", lib
 
-      (bin/"sass").write <<SH
-#!/bin/sh
-exec "#{lib}/dart" "#{lib}/sass.dart.app.snapshot" "$@"
-SH
+      (bin/"sass").write <<~SH
+        #!/bin/sh
+        exec "#{lib}/dart" "#{lib}/sass.dart.app.snapshot" "$@"
+      SH
     end
     chmod 0555, "#{bin}/sass"
   end
 
   test do
-    (testpath/"test.scss").write(".class {property: 1 + 1}");
+    (testpath/"test.scss").write(".class {property: 1 + 1}")
     assert_match "property: 2;", shell_output("#{bin}/sass test.scss 2>&1")
   end
 end

@@ -37,16 +37,16 @@ class Migrator < Formula
       # which was compiled with an older version.
       cp dart/"dart", lib
 
-      (bin/"sass-migrator").write <<SH
-#!/bin/sh
-exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass_migrator.dart.app.snapshot" "$@"
-SH
+      (bin/"sass-migrator").write <<~SH
+        #!/bin/sh
+        exec "#{lib}/dart" "-Dversion=#{version}" "#{lib}/sass_migrator.dart.app.snapshot" "$@"
+      SH
     end
     chmod 0555, "#{bin}/sass-migrator"
   end
 
   test do
-    (testpath/"test.scss").write("a {b: abs(-1)}");
+    (testpath/"test.scss").write("a {b: abs(-1)}")
     assert_match "b: math.abs(-1);",
                  shell_output("#{bin}/sass-migrator -nv module test.scss 2>&1")
   end
