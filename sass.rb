@@ -4,8 +4,8 @@ class Sass < Formula
   desc "Stylesheet Preprocessor"
   homepage "https://sass-lang.com"
 
-  url "https://github.com/sass/dart-sass/archive/1.26.2.tar.gz"
-  sha256 "1e99fe7936c886a65cb893c000c14dc022b53ab63fdb8d936e6917b7e66f9027"
+  url "https://github.com/sass/dart-sass/archive/1.26.3.tar.gz"
+  sha256 "34430ed3736eb484d5ede1aff8e806cb74d1f57fa945f772dee0057d753584a6"
 
   depends_on "dart-lang/dart/dart" => :build
 
