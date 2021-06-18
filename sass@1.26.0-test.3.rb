@@ -10,7 +10,7 @@ class SassAT1260Test3 < Formula
   depends_on "dart-lang/dart/dart" => :build
 
   def install
-    dart = Formula["dart-lang/dart/dart"].opt_bin
+    dart = Formula["dart-lang/dart/dart"].libexec/"bin"
 
     pubspec = YAML.safe_load(File.read("pubspec.yaml"))
     version = pubspec["version"]
