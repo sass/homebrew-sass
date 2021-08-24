@@ -4,8 +4,8 @@ class Migrator < Formula
   desc "Sass Migration Tool"
   homepage "https://sass-lang.com/documentation/cli/migrator"
 
-  url "https://github.com/sass/migrator/archive/1.5.1.tar.gz"
-  sha256 "4a7a6f645d6a24150523a29c40548d6583a3cad8582c1c8b22b7389ade33a91f"
+  url "https://github.com/sass/migrator/archive/1.5.2.tar.gz"
+  sha256 "241fcd5bf94a032951773d24ba19e5114e5faf13903bdc67aa7eacb1fed826c2"
 
   depends_on "dart-lang/dart/dart" => :build
 
