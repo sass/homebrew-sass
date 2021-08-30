@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['**']
+  pull_request:
+
+jobs:
+  dart_tests:
+    name: "Validate"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: arduino/setup-ruby@v1
+        with: { ruby-version: "3.0" }
+      - name: Audit
+        run: brew audit *.rb
+      - name: Install and Test
+        run: |
+          for file in $(ls *.rb); do
+            brew install "$file";
+            brew test "$file";
+            brew uninstall "$file";
+          done
+        env: { HOMEBREW_NO_INSTALL_CLEANUP: 1 }
