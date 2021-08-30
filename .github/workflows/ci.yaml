@@ -1,19 +1,26 @@
 name: Testing of Homebrew recipes
 
-on: [push]
+on:
+  push:
+    branches: [main, feature.*]
+    tags: ['**']
+  pull_request:
 
 jobs:
-  build:
+  test:
+    name: "Verify ${{ matrix.recipe }}"
+
     runs-on: macos-latest
-    env:
-      HOMEBREW_NO_INSTALL_CLEANUP: 1
+    env: {HOMEBREW_NO_INSTALL_CLEANUP: 1}
+
     strategy:
+      fail-fast: false
       matrix:
         recipe:
           - sass@1.23.0-module.beta1.rb
           - sass.rb
           - migrator.rb
-      fail-fast: false
+
     steps:
       - uses: actions/checkout@v2
       - run: brew update
