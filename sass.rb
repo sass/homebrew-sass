@@ -18,18 +18,17 @@ class Sass < Formula
     # Tell the pub server where these installations are coming from.
     ENV["PUB_ENVIRONMENT"] = "homebrew:sass"
 
-    system dart/"pub", "get"
+    system dart/"dart", "pub", "get"
     if Hardware::CPU.is_64_bit?
       # Build a native-code executable on 64-bit systems only. 32-bit Dart
       # doesn't support this.
-      system dart/"dart2native", "-Dversion=#{version}", "bin/sass.dart",
-             "-o", "sass"
+      system dart/"dart", "compile", "exe", "-Dversion=#{version}",
+             "bin/sass.dart", "-o", "sass"
       bin.install "sass"
     else
-      system dart/"dart",
+      system dart/"dart", "compile", "jit-snapshot",
              "-Dversion=#{version}",
-             "--snapshot=sass.dart.app.snapshot",
-             "--snapshot-kind=app-jit",
+             "-o", "sass.dart.app.snapshot",
              "bin/sass.dart", "tool/app-snapshot-input.scss"
       lib.install "sass.dart.app.snapshot"
 
