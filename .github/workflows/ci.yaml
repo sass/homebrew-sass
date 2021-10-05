@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         recipe:
-          - sass@1.23.0-module.beta1.rb
           - sass.rb
           - migrator.rb
 
