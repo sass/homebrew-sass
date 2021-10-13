@@ -30,7 +30,7 @@ class Migrator < Formula
 
   test do
     (testpath/"test.scss").write("a {b: abs(-1)}")
-    assert_match "b: math.abs(-1);",
+    assert_match "b: math.abs(-1)",
                  shell_output("#{bin}/sass-migrator -nv module test.scss 2>&1")
   end
 
