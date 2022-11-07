@@ -9,7 +9,7 @@ class Sass < Formula
   homepage "https://sass-lang.com"
 
   url "https://github.com/sass/dart-sass/archive/1.56.0.tar.gz"
-  sha256 "1fddc66a11847255434227ab38edc3a0c1dbc53bfa9c3a7bc3393eee142fafbb"
+  sha256 "077365a9d5e3068d14e00d4db6f15d6cda66f8052e9e0452e8bf298c8de7e8ab"
 
   depends_on "dart-lang/dart/dart" => :build
 
