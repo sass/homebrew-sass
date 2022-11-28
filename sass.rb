@@ -53,7 +53,7 @@ class Sass < Formula
     system _dart/"dart", "compile", "jit-snapshot",
            "-Dversion=#{_version}",
            "-o", "sass.dart.app.snapshot",
-           "bin/sass.dart", "tool/app-snapshot-input.scss"
+           "bin/sass.dart", "--version"
     lib.install "sass.dart.app.snapshot"
 
     # Copy the version of the Dart VM we used into our lib directory so that if
