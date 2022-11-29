@@ -18,6 +18,7 @@ jobs:
       matrix:
         recipe:
           - sass.rb
+          - dart-sass-embedded.rb
           - migrator.rb
 
     steps:
