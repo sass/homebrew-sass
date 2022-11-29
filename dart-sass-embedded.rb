@@ -47,7 +47,7 @@ class DartSassEmbedded < Formula
   end
 
   def _protocol_version
-    @_protocol_version ||= File.read('build/embedded-protocol/VERSION').strip
+    @_protocol_version ||= File.read("build/embedded-protocol/VERSION").strip
   end
 
   def _implementation_version
