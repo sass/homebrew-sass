@@ -22,7 +22,7 @@ class DartSassEmbedded < Formula
     system _dart/"dart", "run", "grinder", "protobuf"
     # Build a native-code executable on 64-bit systems only. 32-bit Dart
     # doesn't support this.
-    if false # Hardware::CPU.is_64_bit?
+    if Hardware::CPU.is_64_bit?
       _install_native_executable
     else
       _install_script_snapshot
