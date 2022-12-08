@@ -41,9 +41,7 @@ class DartSassEmbedded < Formula
   end
 
   def _version
-    # The next line is current broken: https://github.com/sass/dart-sass-embedded/pull/121
-    # @_version ||= YAML.safe_load(File.read("pubspec.yaml"))["version"]
-    @_version ||= version
+    @_version ||= YAML.safe_load(File.read("pubspec.yaml"))["version"]
   end
 
   def _protocol_version
