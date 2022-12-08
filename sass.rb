@@ -54,16 +54,16 @@ class Sass < Formula
            "-Dversion=#{_version}",
            "-o", "sass.dart.app.snapshot",
            "bin/sass.dart", "--version"
-    lib.install "sass.dart.app.snapshot"
+    libexec.install "sass.dart.app.snapshot"
 
     # Copy the version of the Dart VM we used into our lib directory so that if
     # the user upgrades their Dart VM version it doesn't break Sass's snapshot,
     # which was compiled with an older version.
-    cp _dart/"dart", lib
+    cp _dart/"dart", libexec
 
     (bin/"sass").write <<~SH
       #!/bin/sh
-      exec "#{lib}/dart" "#{lib}/sass.dart.app.snapshot" "$@"
+      exec "#{libexec}/dart" "#{libexec}/sass.dart.app.snapshot" "$@"
     SH
   end
 end
