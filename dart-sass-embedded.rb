@@ -9,7 +9,7 @@ class DartSassEmbedded < Formula
   homepage "https://sass-lang.com"
 
   url "https://github.com/sass/dart-sass-embedded/archive/1.56.2.tar.gz"
-  sha256 "7bad9071fd886a6245173da779edf7ad1b381d9d9d47324b6479f37612d6d70b"
+  sha256 "b3ebbac44034bbd243558838b1ea7a7658fcd9a7518529d05c9c81fd55570a88"
 
   depends_on "dart-lang/dart/dart" => :build
   depends_on "protobuf" => :build
