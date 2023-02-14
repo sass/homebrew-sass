@@ -12,7 +12,7 @@ class DartSassEmbedded < Formula
   sha256 "cc05f883c50de01e4fd3bbaf360481a9df18ac401863f0d40b822261e1ea2cd4"
 
   depends_on "dart-lang/dart/dart" => :build
-  depends_on "protobuf" => :build
+  depends_on "buf" => :build
 
   def install
     # Tell the pub server where these installations are coming from.
