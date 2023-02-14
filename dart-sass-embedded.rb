@@ -8,8 +8,8 @@ class DartSassEmbedded < Formula
   desc "Stylesheet Preprocessor"
   homepage "https://sass-lang.com"
 
-  url "https://github.com/sass/dart-sass-embedded/archive/1.58.0.tar.gz"
-  sha256 "4353686fffa2513ff950f00ed2170689e81efeba90f7385ee11ed79243353e62"
+  url "https://github.com/sass/dart-sass-embedded/archive/1.58.1.tar.gz"
+  sha256 "cc05f883c50de01e4fd3bbaf360481a9df18ac401863f0d40b822261e1ea2cd4"
 
   depends_on "dart-lang/dart/dart" => :build
   depends_on "protobuf" => :build
