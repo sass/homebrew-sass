@@ -3,13 +3,14 @@
 
 require "yaml"
 
-# A formula for the Dart Sass Embedded CLI.
-class DartSassEmbedded < Formula
+# A formula for the Sass CLI.
+class Sass < Formula
   desc "Stylesheet Preprocessor"
   homepage "https://sass-lang.com"
-
-  url "https://github.com/sass/dart-sass-embedded/archive/1.62.1.tar.gz"
-  sha256 "d7845134c31b6e288d267678fa85c16a89f02891ea70b761063f4e26912f68bd"
+  url "https://github.com/sass/dart-sass/archive/1.62.1.tar.gz"
+  sha256 "4da41b83d4189d0a8523e0119856cfcffc10413b09091563057693b9cd7dfb62"
+  license "MIT"
+  head "https://github.com/sass/dart-sass.git", branch: "main"
 
   depends_on "buf" => :build
   depends_on "dart-lang/dart/dart" => :build
@@ -20,6 +21,7 @@ class DartSassEmbedded < Formula
 
     system _dart/"dart", "pub", "get"
     system _dart/"dart", "run", "grinder", "protobuf"
+
     # Build a native-code executable on 64-bit systems only. 32-bit Dart
     # doesn't support this.
     if Hardware::CPU.is_64_bit?
@@ -27,11 +29,12 @@ class DartSassEmbedded < Formula
     else
       _install_script_snapshot
     end
-    chmod 0555, "#{bin}/dart-sass-embedded"
+    chmod 0555, "#{bin}/sass"
   end
 
   test do
-    assert_match '"id": 0', shell_output("#{bin}/dart-sass-embedded --version")
+    (testpath/"test.scss").write(".class {property: 1 + 1}")
+    assert_match "property: 2;", shell_output("#{bin}/sass test.scss 2>&1")
   end
 
   private
@@ -45,34 +48,35 @@ class DartSassEmbedded < Formula
   end
 
   def _protocol_version
-    @_protocol_version ||= File.read("build/embedded-protocol/VERSION").strip
-  end
-
-  def _implementation_version
-    @_implementation_version ||= YAML.safe_load(File.read("pubspec.lock"))["packages"]["sass"]["version"]
+    @_protocol_version ||= File.read("build/language/spec/EMBEDDED_PROTOCOL_VERSION").strip
   end
 
   def _install_native_executable
     system _dart/"dart", "compile", "exe",
-           "-Dprotocol-version=#{_protocol_version}",
+           "-Dversion=#{_version}",
            "-Dcompiler-version=#{_version}",
-           "-Dimplementation-version=#{_implementation_version}",
-           "bin/dart_sass_embedded.dart", "-o", "dart-sass-embedded"
-    bin.install "dart-sass-embedded"
+           "-Dprotocol-version=#{_protocol_version}",
+           "bin/sass.dart", "-o", "sass"
+    bin.install "sass"
   end
 
   def _install_script_snapshot
-    system _dart/"dart", "run", "grinder", "pkg-compile-snapshot"
-    libexec.install "build/dart-sass-embedded.snapshot"
+    system _dart/"dart", "compile", "jit-snapshot",
+           "-Dversion=#{_version}",
+           "-Dcompiler-version=#{_version}",
+           "-Dprotocol-version=#{_protocol_version}",
+           "-o", "sass.snapshot",
+           "bin/sass.dart", "--version"
+    libexec.install "sass.snapshot"
 
     # Copy the version of the Dart VM we used into our lib directory so that if
     # the user upgrades their Dart VM version it doesn't break Sass's snapshot,
     # which was compiled with an older version.
     cp _dart/"dart", libexec
 
-    (bin/"dart-sass-embedded").write <<~SH
+    (bin/"sass").write <<~SH
       #!/bin/sh
-      exec "#{libexec}/dart" "#{libexec}/dart-sass-embedded.snapshot" "$@"
+      exec "#{libexec}/dart" "#{libexec}/sass.snapshot" "$@"
     SH
   end
 end

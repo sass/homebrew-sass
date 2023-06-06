@@ -18,13 +18,13 @@ jobs:
       matrix:
         recipe:
           - sass.rb
-          - dart-sass-embedded.rb
+          - dart-sass-embedded@1.62.1.rb
           - migrator.rb
 
     steps:
       - uses: actions/checkout@v2
       - run: brew update
-      - run: brew audit --strict --git --online --formula $GITHUB_WORKSPACE/${{ matrix.recipe }}
-      - run: brew install --formula $GITHUB_WORKSPACE/${{ matrix.recipe }}
-      - run: brew test $GITHUB_WORKSPACE/${{ matrix.recipe }}
-      - run: brew uninstall --formula $GITHUB_WORKSPACE/${{ matrix.recipe }}
+      - run: brew audit --strict --git --online --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
+      - run: brew install --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
+      - run: brew test $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
+      - run: brew uninstall --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
