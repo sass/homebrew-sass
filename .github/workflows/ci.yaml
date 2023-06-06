@@ -22,7 +22,7 @@ jobs:
           - migrator.rb
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: brew update
       - run: brew audit --strict --git --online --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
       - run: brew install --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
