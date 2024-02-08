@@ -16,7 +16,8 @@ class Sass < Formula
   depends_on "dart-lang/dart/dart" => :build
 
   resource "language" do
-    url "https://github.com/sass/sass.git", revision: "c04dbf6c447caf9d62094597e68fe5bf5d0b4025"
+    url "https://github.com/sass/sass.git",
+      revision: "c04dbf6c447caf9d62094597e68fe5bf5d0b4025"
   end
 
   def install
