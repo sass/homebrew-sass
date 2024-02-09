@@ -17,14 +17,20 @@ jobs:
       fail-fast: false
       matrix:
         recipe:
-          - sass.rb
-          - dart-sass-embedded@1.62.1.rb
-          - migrator.rb
+          - sass
+          - migrator
 
     steps:
       - uses: actions/checkout@v3
       - run: brew update
-      - run: brew audit --strict --git --online --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
-      - run: brew install --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
-      - run: brew test $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
-      - run: brew uninstall --formula $GITHUB_WORKSPACE/Formula/${{ matrix.recipe }}
+      - run: brew tap-new sass/sass
+      - run: brew --repository sass/sass
+      - run: |
+          path="$(brew --repository sass/sass)"
+          rm -rf "$path"
+          ln -s "$(pwd)" "$path"
+      # TODO: Add --online once https://github.com/Homebrew/brew/pull/16626 is fixed
+      - run: brew audit --strict --git sass/sass/${{ matrix.recipe }}
+      - run: brew install sass/sass/${{ matrix.recipe }}
+      - run: brew test sass/sass/${{ matrix.recipe }}
+      - run: brew uninstall sass/sass/${{ matrix.recipe }}

@@ -15,12 +15,21 @@ class Sass < Formula
   depends_on "buf" => :build
   depends_on "dart-lang/dart/dart" => :build
 
+  resource "language" do
+    url "https://github.com/sass/sass.git",
+      revision: "c04dbf6c447caf9d62094597e68fe5bf5d0b4025"
+  end
+
   def install
     # Tell the pub server where these installations are coming from.
     ENV["PUB_ENVIRONMENT"] = "homebrew:sass"
 
+    (buildpath/'build/language').install resource("language")
+
     system _dart/"dart", "pub", "get"
+    ENV["UPDATE_SASS_PROTOCOL"] = "false"
     system _dart/"dart", "run", "grinder", "protobuf"
+    ENV.delete "UPDATE_SASS_PROTOCOL"
 
     # Build a native-code executable on 64-bit systems only. 32-bit Dart
     # doesn't support this.
