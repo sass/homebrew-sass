@@ -7,8 +7,8 @@ require "yaml"
 class Sass < Formula
   desc "Stylesheet Preprocessor"
   homepage "https://sass-lang.com"
-  url "https://github.com/sass/dart-sass/archive/1.70.0.tar.gz"
-  sha256 "540f80a68aab66688aa8395530c958c362a3ba7d2088a0de79cb7d66a2a8c503"
+  url "https://github.com/sass/dart-sass/archive/1.71.0.tar.gz"
+  sha256 "4b088b010ae4161603822b613072a5b59d9cf96127118d5a2efd425b1baa6278"
   license "MIT"
   head "https://github.com/sass/dart-sass.git", branch: "main"
 
@@ -17,7 +17,7 @@ class Sass < Formula
 
   resource "language" do
     url "https://github.com/sass/sass.git",
-      revision: "c04dbf6c447caf9d62094597e68fe5bf5d0b4025"
+      revision: "f6832f974c61e35c42ff08b3640ff155071a02dd"
   end
 
   def install
