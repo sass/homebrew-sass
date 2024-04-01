@@ -17,7 +17,7 @@ class Sass < Formula
 
   resource "language" do
     url "https://github.com/sass/sass.git",
-      revision: "abc32dac8c64f1167375458a67181b8eef259761"
+      revision: "d0123b2e7db457525fe878faf4a6cfe50f3c565f"
   end
 
   def install
