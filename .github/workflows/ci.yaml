@@ -36,9 +36,11 @@ jobs:
           path="$(brew --repository sass/sass)"
           rm -rf "$path"
           ln -s "$(pwd)" "$path"
-      # TODO: Add --online once https://github.com/Homebrew/brew/pull/16626 is fixed
-      - run: brew audit --strict --git "sass/sass/$RECIPE"
+      - run: brew trust sass/sass
+      - run: brew audit --online --strict --git "sass/sass/$RECIPE"
         env: {RECIPE: "${{ matrix.recipe }}"}
+      - run: brew tap dart-lang/dart
+      - run: brew trust dart-lang/dart
       - run: brew install "sass/sass/$RECIPE"
         env: {RECIPE: "${{ matrix.recipe }}"}
       - run: brew test "sass/sass/$RECIPE"
