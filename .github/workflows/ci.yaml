@@ -6,6 +6,12 @@ on:
     tags: ['**']
   pull_request:
 
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: "Verify ${{ matrix.recipe }}"
@@ -21,7 +27,8 @@ jobs:
           - migrator
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: {persist-credentials: false}
       - run: brew update
       - run: brew tap-new sass/sass
       - run: brew --repository sass/sass
@@ -29,8 +36,25 @@ jobs:
           path="$(brew --repository sass/sass)"
           rm -rf "$path"
           ln -s "$(pwd)" "$path"
-      # TODO: Add --online once https://github.com/Homebrew/brew/pull/16626 is fixed
-      - run: brew audit --strict --git sass/sass/${{ matrix.recipe }}
-      - run: brew install sass/sass/${{ matrix.recipe }}
-      - run: brew test sass/sass/${{ matrix.recipe }}
-      - run: brew uninstall sass/sass/${{ matrix.recipe }}
+      - run: brew trust sass/sass
+      - run: brew audit --online --strict --git "sass/sass/$RECIPE"
+        env: {RECIPE: "${{ matrix.recipe }}"}
+      - run: brew tap dart-lang/dart
+      - run: brew trust dart-lang/dart
+      - run: brew install "sass/sass/$RECIPE"
+        env: {RECIPE: "${{ matrix.recipe }}"}
+      - run: brew test "sass/sass/$RECIPE"
+        env: {RECIPE: "${{ matrix.recipe }}"}
+      - run: brew uninstall "sass/sass/$RECIPE"
+        env: {RECIPE: "${{ matrix.recipe }}"}
+
+  analyze_ci:
+    name: Static analysis (GitHub Actions)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with: {persist-credentials: false}
+    - uses: zizmorcore/zizmor-action@3dc1ecc9bcb9e94e9b2c709687979e1298497054 # v0.6.2
+      with:
+        persona: pedantic
+        advanced-security: false # Fail the GitHub action if Zizmor has findings
